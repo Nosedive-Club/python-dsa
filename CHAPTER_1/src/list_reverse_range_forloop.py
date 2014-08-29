@@ -4,21 +4,20 @@ from matplotlib.pyplot import *
 from pylab import *
 
 start = 1001
-ceiling = 50000
+ceiling = 20000
 step = 100
 t1_data = {
     'x' : [ ] ,
     'y' : [ ]
 }
 
-label="list * list" 
-test_case = Timer( "[ i ] * ( i / 2 )" , "from __main__ import n, i" )
-for i in range( start, ceiling, step ):
-    n = list( range( i ) )
-    idx = len( n ) / 2
+label = 'FOREACH xrange( len( n ), 0, -1 )'
+test_case = Timer( "for i in xrange( len( n ), 1, -1 ): x = i" , "from __main__ import n" )
+for j in range( start, ceiling, step ):
+    n = list( range( j ) )
     t1 = test_case.timeit(number=1000)
     t1_data[ 'y' ].append( t1 )
-    t1_data[ 'x' ].append( i )
+    t1_data[ 'x' ].append( j )
 
 fig = plt.figure()
 plt.plot( 
@@ -34,7 +33,7 @@ fit = polyfit( t1_data[ 'x' ], t1_data[ 'y' ], 1 )
 fit_fn = poly1d( fit ) # fit_fn is now a function which takes in x and returns an estimate for y
 c1 = np.arange( start, ceiling, step ) # evenly sampled time at 200ms intervals
 plt.plot( 
-    t1_data[ 'x' ], fit_fn( t1_data[ 'x' ] ), color='g', linestyle='-', linewidth=2, label="fit" 
+    t1_data[ 'x' ], fit_fn( t1_data[ 'x' ] ), color='k', linestyle='-', linewidth=2, label="fit" 
 )
 plt.plot( 
     [ start, ceiling ], [ min( t1_data[ 'y' ] ), max( t1_data[ 'y' ] ) ], color='k', linestyle='--', linewidth=2, label="linear" 

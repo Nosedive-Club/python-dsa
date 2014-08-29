@@ -1,4 +1,0 @@
-#!/usr/bin/bash
-
-export APP_PATH=$(pwd)
-export PYTHONPATH=$APP_PATH:$PYTHONPATH

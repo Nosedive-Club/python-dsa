@@ -15,17 +15,9 @@ Review
 
 - Logarithmn Math related to division
 
-- Anagram variations and analysis
-
-- Popping timeit and efficiency
-
 
 Homework
 -------------
-
--- Look at how a Linked-List and Map are implemented in C to she some light on why list operations are O(n) versus O(1)
-
--- Can we find any information about Python ( C API ) implements things to match up what we learned above
 
 -- Interview questions/problems from books that ask about Big-O notation and comprehension::
 
@@ -43,15 +35,25 @@ Homework
             algorithm takes O (n) time.
 
 
+Interview Questions
+----------------------
+
+http://thereq.com/q/best-python-software-interview-questions/performance
+
+http://thereq.com/q/best-python-software-interview-questions/hard
+
+http://thereq.com/q/best-python-software-interview-questions/algorithm
+
 
 Show-and-Tell from Homework
 ---------------------------------
 
 Graph the known(s) of Big-O effeiciency for Python List and Dict Operators that you care about::
 
-    list index Get Set
+    - list index Get Set
 
-    dict Get Set
+    - matplotlib, how do i draw common big-o constants against my data
+
 
 Big-O efficiency of DFS and BFS::
 
@@ -62,6 +64,7 @@ Big-O efficiency of DFS and BFS::
     - graph them for worst, best and average cases
 
     - what are the Big-O efficiences of each solution? Do they correspond with what we read about?
+
 
 Use Project Euler problems and guess what the Big-O Efficiency is:: 
 
@@ -81,11 +84,17 @@ Use Project Euler problems and guess what the Big-O Efficiency is::
 
     - optimize them?
 
+
 Look for deeper explanations regarding C Python implementations::
 
     - read about Linked List and Hashes in C book
 
     - try to find information about how Python implements these at this level
+
+
+Look at some of the interview questions::
+
+    listed above
 
 
 

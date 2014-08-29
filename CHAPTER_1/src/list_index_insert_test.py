@@ -1,6 +1,7 @@
 from timeit import Timer
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
+from pylab import *
 
 start = 1001
 ceiling = 50000
@@ -10,6 +11,7 @@ t1_data = {
     'y' : [ ]
 }
 
+label="list.insert(idx, n)" 
 test_case = Timer( "n.insert( idx, 999 )" , "from __main__ import n, idx" )
 for i in range( start, ceiling, step ):
     n = list( range( i ) )
@@ -20,25 +22,36 @@ for i in range( start, ceiling, step ):
 
 fig = plt.figure()
 plt.plot( 
-    t1_data[ 'x' ], t1_data[ 'y' ], color='r', linestyle='-', linewidth=2, label="list.insert(index,n)" 
+    t1_data[ 'x' ], t1_data[ 'y' ], color='r', linestyle='-', linewidth=2, label=label
 )
 plt.ylabel( "Milliseconds to complete" )
 plt.xlabel( "Size of List ( K )" )
-#
-#  plot constants as lines to compare output
-#
-c1 = np.arange( start, ceiling, step ) # evenly sampled time at 200ms intervals
-c2 = [1]*( ceiling / step )
-plt.plot( 
-    c1, c1, color='k', linestyle='-', linewidth=2, label="linear" 
-)
-plt.plot(
-    c2, c2, color='k', linestyle='-', linewidth=2, label="constant" 
-)
 
-fig.suptitle( 'List .insert(index,n)', fontsize=13 )
+#
+#  plot linear constant to compare
+#
+fit = polyfit( t1_data[ 'x' ], t1_data[ 'y' ], 1 )
+fit_fn = poly1d( fit ) # fit_fn is now a function which takes in x and returns an estimate for y
+
+cx = np.arange( start, ceiling )
+cy = np.arange( min( t1_data[ 'y' ] ), max( t1_data[ 'y' ] ), 0.001 )
+cx_quadratic = [ min( cx ) ]
+for indx, i in enumerate( cy ):
+    cx_quadratic.append( cx_quadratic[ indx ] ** 2 )
+
+print len( cy )
+print len( cx_quadratic )
+'''
+plt.plot( 
+    t1_data[ 'x' ], fit_fn( t1_data[ 'x' ] ), color='g', linestyle='-', linewidth=2, label="fit" 
+)
+plt.plot( 
+    [ start, ceiling ], [ min( t1_data[ 'y' ] ), max( t1_data[ 'y' ] ) ], color='k', linestyle='--', linewidth=2, label="linear" 
+)
+plt.plot( 
+    cx, cy**2, color='k', linestyle='--', linewidth=4, label="quadratic" 
+)
+fig.suptitle( 'List '+label, fontsize=13 )
 legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
-
-
-        
+'''
