@@ -4,20 +4,20 @@ from matplotlib.pyplot import *
 from pylab import *
 
 start = 1001
-ceiling = 10000
+ceiling = 50000
 step = 100
 t1_data = {
     'x' : [ ] ,
     'y' : [ ]
 }
 
-label = 'list.reverse()'
-test_case = Timer( "for j in n.reverse(): x = j" , "from __main__ import n" )
-for i in range( start, ceiling, step ):
-    n = list( range( i ) )
+label = 'FOREACH list.reverse()'
+test_case = Timer( "n.reverse(); [i for i in n];" , "from __main__ import n" )
+for j in range( start, ceiling, step ):
+    n = list( range( j ) )
     t1 = test_case.timeit(number=1000)
     t1_data[ 'y' ].append( t1 )
-    t1_data[ 'x' ].append( i )
+    t1_data[ 'x' ].append( j )
 
 fig = plt.figure()
 plt.plot( 
