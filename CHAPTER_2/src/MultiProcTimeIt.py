@@ -14,6 +14,11 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
 from pylab import *
 
+#
+#  app level
+#
+from logger import logger
+
 
 class Worker( multiprocessing.Process ):
     
@@ -31,11 +36,11 @@ class Worker( multiprocessing.Process ):
         while True:
             next_task, n_arg = self.task_queue.get()
             if next_task is None:
-                print '[ EXIT ]: %s' % proc_name
+                logger.debug( '[ EXIT ]: %s' % proc_name )
                 self.task_queue.task_done()
                 break
 
-            print '%s -- handling --> %s' % (proc_name, len( n_arg ))
+            logger.debug( '%s -- handling --> %s' % (proc_name, len( n_arg )) )
 
             #
             #  run it over the passed 'number' of iterations
@@ -72,14 +77,14 @@ class TaskRunner( object ):
         return '%s * %s' % (self.a, self.b)
 
     def __call__(self):
-        print '[ # WORKERS ]: %d' % self.num_workers
+        logger.debug( '[ # WORKERS ]: %d' % self.num_workers )
         workers = [ Worker( self.tasks, self.results, **{ 'name' : 'worker-%i'%i } ) for i in xrange(self.num_workers) ]
         for w in workers:
             w.start()
 
         for i in range( self.start, self.stop, self.step ):
             n = range( i )
-            print "[ CREATE TASK @ N ]: %s" % i
+            logger.debug( "[ CREATE TASK @ N ]: %s" % i )
             self.tasks.put( ( self.fn, n ) )
             
         #
@@ -100,7 +105,7 @@ class TaskRunner( object ):
             if not hasattr( result, 'ERROR' ):
                 data[ 'x' ].append( result.get(  'x', 0 ) )
                 data[ 'y' ].append( result.get(  'y', 0 ) )
-            print "[ RESULT ]: %s" % result 
+            logger.debug( "[ RESULT ]: %s" % result  )
         data[ 'x' ].sort()
         data[ 'y' ].sort()
         self._graph_results( data )
