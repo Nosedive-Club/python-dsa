@@ -3,7 +3,7 @@ from MultiProcTimeIt import TaskRunner
 def null_task( n ):
     '''
         expect Task(s) to receive a range list variable "n" which represents
-        the n-th iteration they are working on. this can be used ( or not 0
+        the n-th iteration they are working on. this can be used ( or not )
         in the code you are benchmarking
     '''
     # O( n )
@@ -13,7 +13,7 @@ def null_task( n ):
 def pop_end_task( n ):
     '''
         expect Task(s) to receive a range list variable "n" which represents
-        the n-th iteration they are working on. this can be used ( or not 0
+        the n-th iteration they are working on. this can be used ( or not ) 
         in the code you are benchmarking
     '''
     # O( 1 )
@@ -23,7 +23,7 @@ def pop_end_task( n ):
 def pop_index_task( n ):
     '''
         expect Task(s) to receive a range list variable "n" which represents
-        the n-th iteration they are working on. this can be used ( or not 0
+        the n-th iteration they are working on. this can be used ( or not )
         in the code you are benchmarking
     '''
     # O( n )
